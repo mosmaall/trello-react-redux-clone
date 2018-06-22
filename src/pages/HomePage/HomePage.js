@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import HeaderBar from '../../components/HeaderBar'
 
 class HomePage extends Component {
   render() {
     return (
       <div>
-        <p>HomePage</p>
+        <HeaderBar>Trello</HeaderBar>
       </div>
     )
   }
