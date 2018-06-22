@@ -1,30 +1,14 @@
-import {
-  FETCH_BOARD,
-  CREATE_BOARD,
-  DELETE_BOARD,
-  CHANGE_BOARD_STATUS,
-} from '../actions/types'
+import { CHANGE_BOARD_STATUS } from '../actions/types'
+import { boardsMockup } from '../utils/boardMockup'
 
 const INITIAL_STATE = {
-  board: [],
-  createBoard: false,
+  board: boardsMockup,
 }
 
 export default function boards(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case FETCH_BOARD:
-      return { ...state, board: action.payload }
-
-    case CREATE_BOARD:
-      return { ...state, board: action.payload }
-
-    case DELETE_BOARD:
-      return {
-        board: state.board.filter(board => board.nodeRef !== action.payload),
-      }
-
     case CHANGE_BOARD_STATUS:
-      return { ...state, createBoard: action.payload }
+      return { ...state, board: action.payload }
 
     default:
       return state
