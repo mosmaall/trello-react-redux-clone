@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Routes from './Routes'
 import { Provider } from 'react-redux'
+import promise from 'redux-promise-middleware'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
