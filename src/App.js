@@ -5,6 +5,9 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
 
+const createStoreWithMiddleware = compose(
+  applyMiddleware(thunk, promise())(createStore)
+)
 class App extends Component {
   render() {
     return (
