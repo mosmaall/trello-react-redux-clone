@@ -26,7 +26,7 @@ const Title = styled.p`
 const Card = ({ card }) => {
   return (
     <StyledCard>
-      <Title>{card.title}</Title>
+      <Title> {card.title} </Title>{' '}
     </StyledCard>
   )
 }

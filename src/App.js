@@ -5,6 +5,7 @@ import promise from 'redux-promise-middleware'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
+import './App.css'
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunk, promise())(createStore)

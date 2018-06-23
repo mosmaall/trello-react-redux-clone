@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Card from '../../components/Card'
 import styled from 'styled-components'
 
@@ -24,16 +24,31 @@ const StyledBoard = styled.div`
   white-space: normal;
 `
 
-const Board = ({ board }) => {
-  const cardItems = board.cards.map(c => <Card key={c.id} card={c} />)
-  return (
-    <BoardContainer>
-      <StyledBoard>
-        <p>{board.title}</p>
-        {cardItems}
-      </StyledBoard>
-    </BoardContainer>
-  )
+const Title = styled.h3``
+
+class Board extends Component {
+  render() {
+    const {
+      connectDragPreview,
+      connectDropTarget,
+      connectDragSource,
+    } = this.props
+    const cardItems = this.props.board.cards.map((c, idx) => (
+      <Card key={c.id} card={c} index={idx} />
+    ))
+    return connectDragPreview(
+      connectDragSource(
+        connectDropTarget(
+          <div className="board-container">
+            <StyledBoard>
+              <Title>{this.props.board.title}</Title>
+              {cardItems}
+            </StyledBoard>
+          </div>
+        )
+      )
+    )
+  }
 }
 
 export default Board

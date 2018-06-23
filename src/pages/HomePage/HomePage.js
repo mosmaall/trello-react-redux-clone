@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import HeaderBar from '../../components/HeaderBar'
 import Logo from '../../images/logo.png'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 import { connect } from 'react-redux'
 
 import Boards from '../../components/Boards'
@@ -38,8 +40,9 @@ const StyledLogo = styled.img`
 
 class HomePage extends Component {
   render() {
+    console.log('now props =', this.props)
     const { boards } = this.props
-
+    console.log('boards', boards)
     return (
       <HomePageContainer>
         <StyledHeader>
@@ -57,7 +60,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({})
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomePage)
+export default DragDropContext(HTML5Backend)(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(HomePage)
+)

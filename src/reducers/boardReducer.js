@@ -1,4 +1,4 @@
-import { CHANGE_BOARD_STATUS } from '../actions/types'
+import { MOVE_BOARD } from '../actions/types'
 import { boardsMockup } from '../utils/boardMockup'
 
 const INITIAL_STATE = {
@@ -6,10 +6,10 @@ const INITIAL_STATE = {
 }
 
 export default function boards(state = INITIAL_STATE, action) {
+  console.log(action.payload)
   switch (action.type) {
-    case CHANGE_BOARD_STATUS:
+    case MOVE_BOARD:
       return { ...state, board: action.payload }
-
     default:
       return state
   }
