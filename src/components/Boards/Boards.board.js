@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Card from '../../components/Card'
+import Cards from '../Card'
 import styled from 'styled-components'
 
 const BoardContainer = styled.div`
@@ -33,16 +33,14 @@ class Board extends Component {
       connectDropTarget,
       connectDragSource,
     } = this.props
-    const cardItems = this.props.board.cards.map((c, idx) => (
-      <Card key={c.id} card={c} index={idx} />
-    ))
+
     return connectDragPreview(
       connectDragSource(
         connectDropTarget(
           <div className="board-container">
             <StyledBoard>
               <Title>{this.props.board.title}</Title>
-              {cardItems}
+              <Cards cards={this.props.board.cards} />
             </StyledBoard>
           </div>
         )

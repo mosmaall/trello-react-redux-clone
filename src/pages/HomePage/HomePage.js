@@ -40,9 +40,7 @@ const StyledLogo = styled.img`
 
 class HomePage extends Component {
   render() {
-    console.log('now props =', this.props)
     const { boards } = this.props
-    console.log('boards', boards)
     return (
       <HomePageContainer>
         <StyledHeader>

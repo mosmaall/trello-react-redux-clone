@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 }
 
 export default function boards(state = INITIAL_STATE, action) {
-  console.log(action.payload)
   switch (action.type) {
     case MOVE_BOARD:
       return { ...state, board: action.payload }
