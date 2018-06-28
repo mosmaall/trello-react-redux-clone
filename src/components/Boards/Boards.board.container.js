@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { DragSource } from 'react-dnd'
 import { DropTarget } from 'react-dnd'
 
-import { moveBoard } from '../../actions/boardAction'
+import { moveBoard, attachToBoard } from '../../actions/boardAction'
 
 const boardSource = {
   beginDrag(props, component) {
@@ -12,6 +12,7 @@ const boardSource = {
       id: props.board.id,
       title: props.board.title,
       index: props.index,
+      boardId: props.boardId,
     }
     return item
   },
@@ -30,20 +31,26 @@ const boardTarget = {
     const sourceId = sourceProps.id
     const sourceType = monitor.getItemType()
     const sourceIdx = sourceProps.index
+    const sourceBoard = sourceProps.boardId
+    const targetBoard = targetProps.board.id
 
     const item = {
       source: {
         sourceId,
         sourceIdx,
+        sourceBoard,
       },
       target: {
         targetId,
         targetIdx,
+        targetBoard,
       },
     }
 
     if (targetId !== sourceId && sourceType === 'BOARD') {
       targetProps.onMoveBoard(item, targetProps.allBoard)
+    } else if (!targetProps.board.cards.length && sourceType === 'CARD') {
+      targetProps.attachToBoard(item, targetProps.allBoard)
     }
   },
 }
@@ -67,6 +74,9 @@ const mapDispatchToProps = dispatch => ({
   onMoveBoard(item, allBoard) {
     dispatch(moveBoard(item, allBoard))
   },
+  attachToBoard(item, allBoard) {
+    dispatch(attachToBoard(item, allBoard))
+  },
 })
 
 export default connect(
@@ -74,6 +84,6 @@ export default connect(
   mapDispatchToProps
 )(
   DragSource('BOARD', boardSource, collectDragSource)(
-    DropTarget(['BOARD', 'BOARD'], boardTarget, collectDropTarget)(Board)
+    DropTarget(['CARD', 'BOARD'], boardTarget, collectDropTarget)(Board)
   )
 )

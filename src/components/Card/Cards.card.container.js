@@ -13,6 +13,7 @@ const cardSource = {
       id: props.card.id,
       title: props.card.title,
       index: props.index,
+      boardId: props.boardId,
     }
     return item
   },
@@ -29,19 +30,26 @@ const cardTarget = {
     const sourceId = sourceProps.id
     const sourceType = monitor.getItemType()
     const sourceIdx = sourceProps.index
+    const sourceBoard = sourceProps.boardId
+    const targetBoard = targetProps.boardId
+
     const item = {
-      source: {
+      s: {
         sourceId,
         sourceIdx,
+        sourceBoard,
       },
-      target: {
+      t: {
         targetId,
         targetIdx,
+        targetBoard,
       },
     }
     if (targetId !== sourceId && sourceType === 'CARD') {
       console.log('item =', item)
       targetProps.onMoveCard(item, targetProps.allBoard)
+    } else {
+      console.log('NOOOO')
     }
   },
 }

@@ -40,7 +40,10 @@ class Board extends Component {
           <div className="board-container">
             <StyledBoard>
               <Title>{this.props.board.title}</Title>
-              <Cards cards={this.props.board.cards} />
+              <Cards
+                cards={this.props.board.cards}
+                boardId={this.props.board.id}
+              />
             </StyledBoard>
           </div>
         )
