@@ -12,6 +12,11 @@ export const moveBoard = (item, allBoard) => dispatch => {
   boards.splice(endIndex, 0, removed)
 
   //Now We have NewBoards
+
+  boards.map((b, index) => {
+    b.index = index
+  })
+
   console.log('Newboards =', boards)
 
   //Update Backend here
@@ -38,6 +43,12 @@ export const moveCard = (item, allBoard) => dispatch => {
 
     boards[bIndex].cards.splice(endIndex, 0, removed)
 
+    boards.map(b => {
+      b.cards.map((c, idx) => {
+        c.index = idx
+      })
+    })
+
     console.log('NewBoards =', boards)
 
     dispatch({
@@ -54,6 +65,12 @@ export const moveCard = (item, allBoard) => dispatch => {
     const [removed] = boards[sbIndex].cards.splice(startIndex, 1)
 
     boards[tbIndex].cards.splice(endIndex, 0, removed)
+
+    boards.map(b => {
+      b.cards.map((c, idx) => {
+        c.index = idx
+      })
+    })
 
     console.log('NewBoards =', boards)
 
@@ -74,6 +91,12 @@ export const attachToBoard = (item, allBoard) => dispatch => {
 
   const [removed] = boards[sbIndex].cards.splice(startIndex, 1)
   boards[tbIndex].cards.push(removed)
+
+  boards.map(b => {
+    b.cards.map((c, idx) => {
+      c.index = idx
+    })
+  })
 
   console.log('NewBoards =', boards)
 
